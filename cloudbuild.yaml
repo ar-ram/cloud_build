@@ -1,0 +1,24 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'nginx-temp', '.']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'echo "$DOCKER_PASSWORD" | docker login -u ram0810 --password-stdin'
+    secretEnv: ['DOCKER_PASSWORD']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['tag', 'nginx-temp', 'docker.io/ram0810/nginx-sample:latest']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'docker.io/ram0810/nginx-sample:latest']
+
+availableSecrets:
+  secretManager:
+    - versionName: "projects/trial-003-457615/secrets/DOCKER_PASSWORD/versions/latest"
+      env: "DOCKER_PASSWORD"
+
+options:
+  logging: CLOUD_LOGGING_ONLY
