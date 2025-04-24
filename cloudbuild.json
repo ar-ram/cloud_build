@@ -5,26 +5,30 @@
         "args": ["build", "-t", "nginx-temp", "."]
       },
       {
-        "name": "gcr.io/google.com/cloudsdktool/cloud-sdk",
+        "name": "gcr.io/cloud-builders/docker",
+        "entrypoint": "bash",
         "args": [
-          "gcloud",
-          "functions",
-          "deploy",
-          "validator-data", 
-          "--region=us-west1",
-          "--source=.",
-          "--trigger-http",
-          "--runtime=nodejs18"
-        ]
+          "-c",
+          "echo $DOCKER_PASSWORD | docker login -u ram0810 --password-stdin"
+        ],
+        "secretEnv": ["DOCKER_PASSWORD"]
+      },
+      {
+        "name": "gcr.io/cloud-builders/docker",
+        "args": ["tag", "nginx-temp", "docker.io/ram0810/nginx-sample:latest"]
+      },
+      {
+        "name": "gcr.io/cloud-builders/docker",
+        "args": ["push", "docker.io/ram0810/nginx-sample:latest"]
       }
     ],
-    "availableSecrets": {
-      "secretManager": [
-        {
-          "versionName": "projects/YOUR_PROJECT_ID/secrets/docker-hub-credentials/versions/latest",
-          "env": ["DOCKER_PASSWORD"]
+    "secrets": [
+      {
+        "kmsKeyName": "projects/trial-003-457615/locations/global/keyRings/cloudbuild/cryptoKeys/docker-secret-key",
+        "secretEnv": {
+          "DOCKER_PASSWORD": "CiQAKkc4LMgM9Rc3rdGA5e7eAW18h/BbNl+6DVW56OpyltK5nHMSTQBC2o7NU3VxB7TjJo8SrFnmIMcj7O9aecfIehP8gsiKX8453mVBeNG8Bf1hSi4JTG0/BVIJBXHVfDQTpDpqO9HubeoBz9uYi2o8QBiH"
         }
-      ]
-    }
+      }
+    ]
   }
   
