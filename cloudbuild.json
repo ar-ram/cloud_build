@@ -26,9 +26,8 @@
       "secretManager": [
         {
           "versionName": "projects/your-gcp-project-id/secrets/docker-hub-credentials/versions/latest",
-          "env": ["DOCKER_PASSWORD"]
+          "env": "DOCKER_PASSWORD"
         }
       ]
     }
-  }
-  
+}
