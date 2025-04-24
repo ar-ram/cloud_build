@@ -29,6 +29,9 @@
           "DOCKER_PASSWORD": "CiQAKkc4LMgM9Rc3rdGA5e7eAW18h/BbNl+6DVW56OpyltK5nHMSTQBC2o7NU3VxB7TjJo8SrFnmIMcj7O9aecfIehP8gsiKX8453mVBeNG8Bf1hSi4JTG0/BVIJBXHVfDQTpDpqO9HubeoBz9uYi2o8QBiH"
         }
       }
-    ]
+    ],
+    "options": {
+      "logging": "CLOUD_LOGGING_ONLY"
+    }
   }
   
