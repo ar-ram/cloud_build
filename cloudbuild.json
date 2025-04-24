@@ -9,7 +9,7 @@
         "entrypoint": "bash",
         "args": [
           "-c",
-          "echo $DOCKER_PASSWORD | docker login -u ram0810 --password-stdin"
+          "echo \"$DOCKER_PASSWORD\" | docker login -u ram0810 --password-stdin"
         ],
         "secretEnv": ["DOCKER_PASSWORD"]
       },
