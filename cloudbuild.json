@@ -9,9 +9,11 @@
         "entrypoint": "bash",
         "args": [
           "-c",
-          "echo $DOCKER_PASSWORD | docker login -u ram0810 --password-stdin"
+          "echo \"$DOCKER_PASSWORD\" | docker login -u ram0810 --password-stdin"
         ],
-        "env": ["DOCKER_PASSWORD"]
+        "env": [
+          "DOCKER_PASSWORD=${_DOCKER_PASSWORD}"
+        ]
       },
       {
         "name": "gcr.io/cloud-builders/docker",
@@ -25,8 +27,8 @@
     "availableSecrets": {
       "secretManager": [
         {
-          "versionName": "projects/trial-003-457615/secrets/docker-hub-credentials/versions/latest",
-          "env": ["DOCKER_PASSWORD"]
+          "versionName": "projects/YOUR_PROJECT_ID/secrets/docker-hub-credentials/versions/latest",
+          "env": ["_DOCKER_PASSWORD"]
         }
       ]
     }
