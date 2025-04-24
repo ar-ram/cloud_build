@@ -25,9 +25,10 @@
     "availableSecrets": {
       "secretManager": [
         {
-          "versionName": "projects/your-gcp-project-id/secrets/docker-hub-credentials/versions/latest",
-          "env": "DOCKER_PASSWORD"
+          "versionName": "projects/trial-003-457615/secrets/docker-hub-credentials/versions/latest",
+          "env": ["DOCKER_PASSWORD"]
         }
       ]
     }
-}
+  }
+  
