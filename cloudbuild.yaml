@@ -1,5 +1,5 @@
 steps:
-  # Step 1: Build the image locally with a temporary name
+  # Step 1: Build Docker image locally
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 'nginx-temp', '.']
 
@@ -13,16 +13,16 @@ steps:
     secretEnv:
       - DOCKER_PASSWORD
 
-  # Step 3: Tag the image for Docker Hub
+  # Step 3: Tag image with Docker Hub name
   - name: 'gcr.io/cloud-builders/docker'
     args: ['tag', 'nginx-temp', 'docker.io/ram0810/nginx-sample:latest']
 
-  # Step 4: Push the image to Docker Hub
+  # Step 4: Push image to Docker Hub
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'docker.io/ram0810/nginx-sample:latest']
 
 availableSecrets:
   secretManager:
-    - versionName: projects/YOUR_PROJECT_ID/secrets/docker-hub-credentials/versions/latest
+    - versionName: projects/my-gcp-project/secrets/docker-hub-credentials/versions/latest
       env:
         - DOCKER_PASSWORD
