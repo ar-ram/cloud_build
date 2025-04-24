@@ -1,0 +1,31 @@
+steps:
+  # Step 1: Build the image from Dockerfile (temporary local tag)
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'nginx-temp', '.']
+
+  # Step 2: Login to Docker Hub securely
+  - name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        echo "$DOCKER_PASSWORD" | docker login -u ram0810 --password-stdin
+    secretEnv: ['DOCKER_PASSWORD']
+
+  # Step 3: Tag the image for Docker Hub
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'tag',
+      'nginx-temp',
+      'docker.io/ram0810/nginx-sample:latest'
+    ]
+
+  # Step 4: Push the image to Docker Hub
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'docker.io/ram0810/nginx-sample:latest']
+
+# Tell Cloud Build how to get the secret
+availableSecrets:
+  secretManager:
+    - versionName: projects/YOUR_PROJECT_ID/secrets/docker-hub-credentials/versions/latest
+      env: ['DOCKER_PASSWORD']
