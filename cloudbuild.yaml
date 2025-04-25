@@ -13,6 +13,17 @@ steps:
 
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'docker.io/ram0810/nginx-sample:latest']
+  
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      [
+        'compute',
+        'ssh',
+        'ar_ramkumar2002@build',
+        '--zone=us-central1-a',
+        '--command',
+        'docker pull docker.io/ram0810/nginx-sample:latest && docker stop web || true && docker rm web || true && docker run -d --name web -p 80:80 docker.io/ram0810/nginx-sample:latest'
+      ]
 
 options:
   logging: CLOUD_LOGGING_ONLY
