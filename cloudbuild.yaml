@@ -19,8 +19,8 @@ steps:
       [
         'compute',
         'ssh',
-        'ar_ramkumar2002@build',
-        '--zone=us-central1-a',
+        'ar_ramkumar2002@build-demo',
+        '--zone=us-central1-c',
         '--command',
         # 'docker pull docker.io/ram0810/nginx-sample:latest && docker stop web || true && docker rm web || true && docker run -d --name web -p 80:80 docker.io/ram0810/nginx-sample:latest'
         'docker stop web || true && docker rm web || true && docker pull docker.io/ram0810/nginx-sample:latest && docker run -d --name web -p 80:80 docker.io/ram0810/nginx-sample:latest'
